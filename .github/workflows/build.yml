@@ -1,0 +1,24 @@
+name: Build With Status
+
+on:
+  push:
+    branches: "**"
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y -f build-essential g++ make
+  build:
+    needs: intall
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build Project
+        run: g++ -std=c++17 main.cpp
