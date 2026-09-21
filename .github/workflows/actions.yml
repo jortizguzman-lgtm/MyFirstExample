@@ -1,4 +1,4 @@
-name: Build With Status
+name: Build MyExample
 
 on:
   push:
@@ -11,14 +11,14 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y -f build-essential g++ make
+          sudo apt-get install -y -f build-essential g++ cmake
   build:
-    needs: intall
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Build Project
+      - name: Build project
         run: g++ -std=c++17 main.cpp
